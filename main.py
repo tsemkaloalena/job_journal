@@ -17,8 +17,12 @@ def main():
     action_list = []
     for elem in sp:
         leader = session.query(User).filter(User.id == elem.team_leader).first()
+        if elem.is_finished:
+            finished = 'Is finished'
+        else:
+            finished = 'Is not finished'
         action_list.append([elem.id, elem.job, leader.surname + ' ' + leader.name, elem.work_size,
-                            elem.collaborators, elem.is_finished])
+                            elem.collaborators, finished])
     return render_template('index.html', actions=action_list)
 
 
